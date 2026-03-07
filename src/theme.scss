@@ -4,8 +4,15 @@
     --glider-right-padding: calc((100% - 80rem) / 2 + 7.75rem);
     --glider-bottom-padding: 0.5rem;
     --glider-left-padding: 0;
-    --glider-peek: 0.5;
+    --glider-peek: 0;
     --glider-spacing: 1rem;
+
+    --glider-grid-columns: 2;
+    --glider-grid-columns-sm: 3.8;
+    --glider-grid-columns-md: 3;
+    --glider-grid-columns-lg: 4;
+    --glider-grid-columns-xl: 6;
+
 }
 
 .glider {
@@ -75,7 +82,7 @@
         &:hover, &:focus {
             outline: 2px solid #7d7d7d;
         }
-        
+
         &.active {
             background-color: #a9a9a9;
         }
@@ -101,7 +108,7 @@
             @container glider-cq (min-width: 510px) {
                 grid-auto-columns: calc(96% / 3);
             }
-        
+
             @container glider-cq (min-width: 690px) {
                 grid-auto-columns: calc(96% / 3);
             }

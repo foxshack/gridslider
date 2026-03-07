@@ -117,5 +117,4 @@ See `index.html` for a working demo:
 
 ## License
 
-MIT © M Horrocks
-
+MIT © Fox Shack
