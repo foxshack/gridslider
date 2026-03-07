@@ -15,10 +15,10 @@
 
 }
 
-.glider {
+[data-glider] {
     position: relative;
 
-    .glider-grid {
+    [data-glider-grid] {
         display: grid;
         grid-auto-columns: calc(100% / (2 + var(--glider-peek)) - var(--glider-spacing));
         gap: var(--glider-spacing);
@@ -28,18 +28,19 @@
         scroll-behavior: smooth;
         scrollbar-width: none;
         padding: 0.5rem;
+    }
 
-        &-item {
-            height: auto;
-            scroll-snap-align: start;
-            aspect-ratio: 9 / 16;
-        }
+    [data-glider-item] {
+        height: auto;
+        scroll-snap-align: start;
+        aspect-ratio: 9 / 16;
     }
 }
 
+// Media query based responsive variant
 .glider-mq {
 
-    .glider-grid {
+    [data-glider-grid] {
         @media (min-width: 576px) {
             grid-auto-columns: calc(97% / 3.8);
         }
@@ -64,28 +65,28 @@
     }
 }
 
-.glider-pager {
+[data-glider-pager] {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
     align-items: center;
     margin: 0.5rem 0;
+}
 
-    &-item {
-        border: none;
-        width: 1rem;
-        height: 1rem;
-        background-color: #d3d3d3;
-        border-radius: 50%;
-        cursor: pointer;
+[data-glider-pager-item] {
+    border: none;
+    width: 1rem;
+    height: 1rem;
+    background-color: #d3d3d3;
+    border-radius: 50%;
+    cursor: pointer;
 
-        &:hover, &:focus {
-            outline: 2px solid #7d7d7d;
-        }
+    &:hover, &:focus {
+        outline: 2px solid #7d7d7d;
+    }
 
-        &.active {
-            background-color: #a9a9a9;
-        }
+    &[data-state="active"] {
+        background-color: #a9a9a9;
     }
 }
 
@@ -94,17 +95,14 @@
 // md: 690 (3)
 // sm: 510 (3.5)
 
+// Container query based responsive variant
 @supports (container-type: inline-size) {
 
     .glider-cq {
         container-type: inline-size;
         container-name: glider-cq;
 
-        .glider-grid {
-            // @container glider-cq (min-width: 510px) {
-            //     grid-auto-columns: calc(97% / 3.8);
-            // }
-
+        [data-glider-grid] {
             @container glider-cq (min-width: 510px) {
                 grid-auto-columns: calc(96% / 3);
             }

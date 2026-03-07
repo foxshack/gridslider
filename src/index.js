@@ -118,14 +118,13 @@ const glider = {};
  */
 glider.init = function ({
   element,
-  gridSelector = ".glider-grid",
-  pagerSelector = ".glider-pager",
-  itemSelector = ".glider-grid-item",
-  pagerItemClass = "glider-pager-item",
-  nextButtonSelector = ".glider-next",
-  prevButtonSelector = ".glider-prev",
-  startButtonSelector = ".glider-start",
-  endButtonSelector = ".glider-end",
+  gridSelector = "[data-glider-grid]",
+  pagerSelector = "[data-glider-pager]",
+  itemSelector = "[data-glider-item]",
+  nextButtonSelector = '[data-glider-nav="next"]',
+  prevButtonSelector = '[data-glider-nav="prev"]',
+  startButtonSelector = '[data-glider-nav="start"]',
+  endButtonSelector = '[data-glider-nav="end"]',
 } = {}) {
   this.glider = element;
   this.grid = this.glider.querySelector(gridSelector);
@@ -140,8 +139,7 @@ glider.init = function ({
   // how do we detect this (would we need mutation observer)
   this.items = this.grid.querySelectorAll(itemSelector);
 
-  this.pagerItemClass = pagerItemClass;
-  this.pagerItemSelector = `.${pagerItemClass}`;
+  this.pagerItemSelector = "[data-glider-pager-item]";
 
   this.initPager();
   this.initButtons();
@@ -216,8 +214,7 @@ glider.generatePagerLinks = function () {
 
 glider.generatePagerLink = function (pageNumber, itemNumber) {
   const btn = document.createElement("button");
-  btn.classList.add(this.pagerItemClass);
-  // btn.textContent = pageNumber;
+  btn.setAttribute("data-glider-pager-item", "");
   btn.setAttribute("aria-label", `Page ${pageNumber + 1}`);
   btn.setAttribute("data-page", pageNumber);
   btn.setAttribute("data-item", itemNumber);
@@ -274,9 +271,9 @@ glider.setActivePage = function (pageNumber) {
 
   if (pagerItems.length > 0) {
     pagerItems.forEach((item) => {
-      item.classList.remove("active");
+      item.removeAttribute("data-state");
     });
-    pagerItems[pageNumber].classList.add("active");
+    pagerItems[pageNumber].setAttribute("data-state", "active");
   }
 };
 
@@ -507,13 +504,7 @@ const makeGlider = function (element) {
   return obj;
 };
 
-const els = document.querySelectorAll(".glider");
-
-els.forEach((el) => {
-  makeGlider(el);
-});
-
-const initGlider = function ({ sliderSelector = ".glider" } = {}) {
+const initGlider = function ({ sliderSelector = "[data-glider]" } = {}) {
   const els = document.querySelectorAll(sliderSelector);
 
   els.forEach((el) => {
