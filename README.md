@@ -49,18 +49,35 @@ GridSlider follows modern best practices by using **data attributes for JavaScri
 
 ## 📦 Installation
 
-Clone or download this repository:
+### CDN
 
-```bash
-git clone https://github.com/foxshack/gridslider.git
-```
-
-Include the files in your project:
+The CDN version includes the CSS and JavaScript in a single package for easy
+setup. Just include these tags in your HTML:
 
 ```html
-<link rel="stylesheet" href="path/to/theme.css">
-<script type="module" src="path/to/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.1.0/src/theme.css">
+<!-- Self instantiating version for simple install and setup -->
+<script type="module" src="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.1.0/index.js"></script>
 ```
+
+### Install via npm
+
+```bash
+npm install git+https://github.com/foxshack/gridslider.git#v1.1.0
+```
+
+Then import in your JavaScript:
+```
+import initGlider from 'gridslider';
+initGlider();
+```
+
+Add the CSS to your build process or include directly (or see CDN section below):
+```
+import 'gridslider/src/theme.css';
+```
+
+**Note: The `initGlider` function will automatically initialize all elements with the `data-glider` attribute. You can also pass a custom selector if needed.**
 
 ---
 
@@ -229,18 +246,18 @@ initGlider(options)
 
 ### Data Attributes
 
-| Attribute | Element | Description |
-|-----------|---------|-------------|
-| `data-glider` | Container | Main slider container |
-| `data-glider-grid` | Container | Grid wrapper for items |
-| `data-glider-item` | Item | Individual slider item |
-| `data-glider-pager` | Container | Pagination dots container |
-| `data-glider-pager-item` | Button | Pagination dot (auto-generated) |
-| `data-glider-nav="start"` | Button | Navigate to first page |
-| `data-glider-nav="prev"` | Button | Navigate to previous page |
-| `data-glider-nav="next"` | Button | Navigate to next page |
-| `data-glider-nav="end"` | Button | Navigate to last page |
-| `data-state="active"` | Element | Active state indicator |
+| Attribute                 | Element   | Description                     |
+|-----------                |---------  |-------------                    |
+| `data-glider`             | Container | Main slider container           |
+| `data-glider-grid`        | Container | Grid wrapper for items          |
+| `data-glider-item`        | Item      | Individual slider item          |
+| `data-glider-pager`       | Container | Pagination dots container       |
+| `data-glider-pager-item`  | Button    | Pagination dot (auto-generated) |
+| `data-glider-nav="start"` | Button    | Navigate to first page          |
+| `data-glider-nav="prev"`  | Button    | Navigate to previous page       |
+| `data-glider-nav="next"`  | Button    | Navigate to next page           |
+| `data-glider-nav="end"`   | Button    | Navigate to last page           |
+| `data-state="active"`     | Element   | Active state indicator          |
 
 ### Instance Methods
 
