@@ -348,7 +348,7 @@ Contributions are welcome! Feel free to:
 
 ## 📝 Changelog
 
-### v2.0.0 (2026-03-21) — ⚠️ Breaking changes
+### v1.1.0 (2026-03-21) — ⚠️ Breaking changes
 - 💥 **CSS variables renamed** — all layout and theming variables have moved to the `--gs-*` prefix (see migration guide below)
 - 🎨 Simplified responsive track sizing to `--gs-visible-cols*` and `--gs-visible-gaps*`
 - 📐 Container query variables now set at selector level for easier extension

@@ -1,6 +1,6 @@
 # Changelog
 
-## v2.0.0 — 2026-03-21
+## v1.1.0 — 2026-03-21
 
 ### Breaking Changes
 - **CSS variables renamed** to the `--gs-*` prefix. Any overrides of the old `--glider-*` variables must be updated:

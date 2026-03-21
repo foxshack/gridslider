@@ -29,9 +29,8 @@
   margin: 0.5rem 0;
 }
 [data-glider] [data-glider-item] {
-  height: auto;
+  height: 100%;
   scroll-snap-align: start;
-  aspect-ratio: 9/16;
 }
 
 @media (min-width: 576px) {
