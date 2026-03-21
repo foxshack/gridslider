@@ -49,8 +49,18 @@ GridSlider follows modern best practices by using **data attributes for JavaScri
 
 ## 📦 Installation
 
+The simplest way to get started is to include the CSS and JavaScript via CDN. For more control, you can install via npm and import into your build process.
 
+### CDN
 
+The CDN version includes the CSS and JavaScript in a single package for easy
+setup. Just include these tags in your HTML:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.1.0/dist/theme.css">
+<!-- Self instantiating version for simple install and setup -->
+<script type="module" src="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.1.0/dist/gridslider.js"></script>
+```
 
 ### Install via npm
 
@@ -64,19 +74,12 @@ import initGlider from 'gridslider';
 initGlider();
 ```
 
-Add the CSS to your build process or include directly (or see CDN section below):
+Add the CSS to your build process or include directly (or see CDN section above):
 ```
 import 'gridslider/src/theme.css';
 ```
 
 **Note: The `initGlider` function will automatically initialize all elements with the `data-glider` attribute. You can also pass a custom selector if needed.**
-
-### CDN
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.1.0/src/theme.css">
-<!-- Self instantiating version for simple install and setup -->
-<script type="module" src="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.1.0/index.js"></script>
-```
 
 ---
 

@@ -2,20 +2,30 @@
   "name": "gridslider",
   "version": "1.1.0",
   "description": "A library for creating slider elements using CSS grids",
-  "source": "src/index.js",
-  "module": "dist/gridslider.js",
+  "module": "dist/gridslider.mjs",
+  "simple": "dist/gridslider.js",
   "typings": "src/gridslider.d.ts",
   "exports": {
-    ".": "./dist/index.js",
+    ".": "./dist/gridslider.mjs",
+    "./simple": "./dist/gridslider.js",
     "./theme.css": "./dist/theme.css"
   },
   "targets": {
     "module": {
+      "source": "src/gridslider.js",
+      "outputFormat": "esmodule",
       "isLibrary": true
+    },
+    "simple": {
+      "source": "src/index.js",
+      "context": "browser",
+      "outputFormat": "global",
+      "isLibrary": false
     }
   },
   "scripts": {
-    "build": "npm run build:js && npm run build:css",
+    "build": "npm run clean && npm run build:js && npm run build:css",
+    "clean": "rm -rf dist",
     "build:js": "parcel build",
     "build:css": "sass src/theme.scss dist/theme.css",
     "watch": "parcel watch",
