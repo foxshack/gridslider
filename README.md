@@ -1,6 +1,6 @@
 # GridSlider
 
-**GridSlider** is a lightweight, modern JavaScript library for creating responsive, touch-friendly, and accessible slider/carousel components using CSS Grid. Built with modern web standards and best practices.
+[**GridSlider**](https://foxshack.github.io/gridslider/) is a lightweight, modern JavaScript library for creating responsive, touch-friendly, and accessible slider/carousel components using CSS Grid. Built with modern web standards and best practices.
 
 ---
 
