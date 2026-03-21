@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.0.0 — 2026-03-21
+
+### Breaking Changes
+- **CSS variables renamed** to the `--gs-*` prefix. Any overrides of the old `--glider-*` variables must be updated:
+
+  | Old variable | New variable |
+  |---|---|
+  | `--glider-spacing` | `--gs-gap-spacing` |
+  | `--glider-mq-pc` | `--gs-visible-cols` + `--gs-visible-gaps` |
+  | `--glider-mq-pc-sm` | `--gs-visible-cols-sm` + `--gs-visible-gaps-sm` |
+  | `--glider-mq-pc-md` | `--gs-visible-cols-md` + `--gs-visible-gaps-md` |
+  | `--glider-mq-pc-lg` | `--gs-visible-cols-lg` + `--gs-visible-gaps-lg` |
+  | `--glider-mq-pc-xl` | `--gs-visible-cols-xl` + `--gs-visible-gaps-xl` |
+  | `--glider-pager-item-color` | `--gs-pager-item-color` |
+
+---
+
 ## 2026-03-21
 
 ### Changed

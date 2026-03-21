@@ -348,10 +348,25 @@ Contributions are welcome! Feel free to:
 
 ## 📝 Changelog
 
-### v1.1.0 (2026)
+### v2.0.0 (2026-03-21) — ⚠️ Breaking changes
+- 💥 **CSS variables renamed** — all layout and theming variables have moved to the `--gs-*` prefix (see migration guide below)
 - 🎨 Simplified responsive track sizing to `--gs-visible-cols*` and `--gs-visible-gaps*`
-- 📐 Documented selector-level container query overrides for easier extension
-- 🧭 Added `--gs-pager-item-color` for pager dot theming
+- 📐 Container query variables now set at selector level for easier extension
+- 🐛 Fixed last-page active state edge cases in `updateActivePage` and `getCurrentPage`
+
+#### Migrating from v1.x
+
+Replace any overrides of the old variables in your own CSS:
+
+| Old variable | New variable |
+|---|---|
+| `--glider-spacing` | `--gs-gap-spacing` |
+| `--glider-mq-pc` | `--gs-visible-cols` + `--gs-visible-gaps` |
+| `--glider-mq-pc-sm` | `--gs-visible-cols-sm` + `--gs-visible-gaps-sm` |
+| `--glider-mq-pc-md` | `--gs-visible-cols-md` + `--gs-visible-gaps-md` |
+| `--glider-mq-pc-lg` | `--gs-visible-cols-lg` + `--gs-visible-gaps-lg` |
+| `--glider-mq-pc-xl` | `--gs-visible-cols-xl` + `--gs-visible-gaps-xl` |
+| `--glider-pager-item-color` | `--gs-pager-item-color` |
 
 ### v1.0.0 (2026)
 - ✨ Refactored to use modern data attribute pattern
