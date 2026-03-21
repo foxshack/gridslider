@@ -62,11 +62,19 @@ setup. Just include these tags in your HTML:
 <script type="module" src="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.1.0/dist/gridslider.js"></script>
 ```
 
-### Install via npm
+### Install from GitHub
 
 ```bash
-npm install git+https://github.com/visionmedia/express.git#v1.1.0
+npm install github:foxshack/gridslider#v1.1.0
 ```
+
+You can also use a branch while iterating:
+
+```bash
+npm install github:foxshack/gridslider#main
+```
+
+Use tags (for example `#v1.1.0`) for reproducible builds, and branch refs (for example `#main`) for testing in-progress changes.
 
 Then import in your JavaScript:
 ```
