@@ -269,12 +269,20 @@ glider.updateActivePage = function () {
 glider.setActivePage = function (pageNumber) {
   const pagerItems = this.pager.querySelectorAll(this.pagerItemSelector);
 
-  if (pagerItems.length > 0) {
-    pagerItems.forEach((item) => {
-      item.removeAttribute("data-state");
-    });
-    pagerItems[pageNumber].setAttribute("data-state", "active");
+  if (pagerItems.length === 0) {
+    return;
   }
+
+  pagerItems.forEach((item) => {
+    item.removeAttribute("data-state");
+  });
+
+  // During responsive recalculations, pageNumber can briefly exceed pager length.
+  const safePageNumber = Math.max(
+    0,
+    Math.min(pageNumber, pagerItems.length - 1),
+  );
+  pagerItems[safePageNumber].setAttribute("data-state", "active");
 };
 
 /**

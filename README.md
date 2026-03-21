@@ -147,15 +147,44 @@ For component-based responsive behavior:
 
 ### CSS Variables
 
-Customize appearance via CSS variables:
+GridSlider now uses percentage-based column width variables for responsive `grid-auto-columns` sizing.
+This replaces the older column-count and peek-based variables (`--glider-grid-columns*` and `--glider-peek`).
 
 ```css
 :root {
-  --glider-spacing: 1rem;        /* Gap between items */
-  --glider-peek: 0;              /* Peek amount for next item */
-  --glider-grid-columns: 2;      /* Base columns */
+  --glider-spacing: 1rem; /* Gap between items */
+
+  /* Media query variant (.glider-mq) */
+  --glider-mq-pc: 48%;
+  --glider-mq-pc-sm: 28%;
+  --glider-mq-pc-md: 32.3%;
+  --glider-mq-pc-lg: 24%;
+  --glider-mq-pc-xl: 15.5%;
+
+  /* Container query variant (.glider-cq) */
+  --glider-cq-pc: 48%;
+  --glider-cq-pc-sm: 32%;
+  --glider-cq-pc-md: 32%;
+  --glider-cq-pc-lg: 24%;
+  --glider-cq-pc-xl: 15.5%;
+
+  --glider-pager-item-color: #d3d3d3; /* Pager dot base color */
 }
 ```
+
+Lower percentages show more items in view; higher percentages show fewer, larger items.
+
+Example override:
+
+```css
+:root {
+  --glider-mq-pc-sm: 30%;
+  --glider-mq-pc-md: 30%;
+  --glider-cq-pc-sm: 30%;
+}
+```
+
+If upgrading from v1.0.0, remove any `--glider-peek` and `--glider-grid-columns*` overrides, as they no longer affect layout.
 
 ### Styling Variants
 
@@ -315,6 +344,11 @@ Contributions are welcome! Feel free to:
 ---
 
 ## 📝 Changelog
+
+### v1.1.0 (2026)
+- 🎨 Switched responsive track sizing to percentage-based CSS variables
+- 📐 Added separate variable sets for `.glider-mq` and `.glider-cq` breakpoints
+- 🧭 Added `--glider-pager-item-color` for pager dot theming
 
 ### v1.0.0 (2026)
 - ✨ Refactored to use modern data attribute pattern
