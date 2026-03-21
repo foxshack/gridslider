@@ -57,15 +57,15 @@ The CDN version includes the CSS and JavaScript in a single package for easy
 setup. Just include these tags in your HTML:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.1.0/dist/theme.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.2.1/dist/theme.css">
 <!-- Self instantiating version for simple install and setup -->
-<script type="module" src="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.1.0/dist/gridslider.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/foxshack/gridslider@1.2.1/dist/gridslider.js"></script>
 ```
 
 ### Install from GitHub
 
 ```bash
-npm install github:foxshack/gridslider#v1.1.0
+npm install github:foxshack/gridslider#v1.2.1
 ```
 
 You can also use a branch while iterating:
@@ -74,7 +74,7 @@ You can also use a branch while iterating:
 npm install github:foxshack/gridslider#main
 ```
 
-Use tags (for example `#v1.1.0`) for reproducible builds, and branch refs (for example `#main`) for testing in-progress changes.
+Use tags (for example `#v1.2.1`) for reproducible builds, and branch refs (for example `#main`) for testing in-progress changes.
 
 Then import in your JavaScript:
 ```
