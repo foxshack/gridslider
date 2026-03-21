@@ -1,36 +1,20 @@
 :root {
-    --glider-spacing: 1rem;
-    // --glider-top-padding: 0.5rem;
-    // --glider-right-padding: calc((100% - 80rem) / 2 + 7.75rem);
-    // --glider-bottom-padding: 0.5rem;
-    // --glider-left-padding: 0;
-    // --glider-peek: 0;
+    --gs-gap-spacing: 1rem;
 
-    // --glider-grid-columns: 2;
-    // --glider-grid-columns-sm: 3.8;
-    // --glider-grid-columns-md: 3;
-    // --glider-grid-columns-lg: 4;
-    // --glider-grid-columns-xl: 6;
+    --gs-visible-cols: 2;
+    --gs-visible-gaps: 1;
 
-    // --glider-grid-columns: 2;
-    // --glider-grid-columns-sm: 3.8;
-    // --glider-grid-columns-md: 3;
-    // --glider-grid-columns-lg: 4;
-    // --glider-grid-columns-xl: 6;
+    --gs-visible-cols-sm: 3.8;
+    --gs-visible-cols-md: 3;
+    --gs-visible-cols-lg: 4;
+    --gs-visible-cols-xl: 6;
 
-    --glider-mq-pc: 48%;
-    --glider-mq-pc-sm: 28%;
-    --glider-mq-pc-md: 32.3%;
-    --glider-mq-pc-lg: 24%;
-    --glider-mq-pc-xl: 15.5%;
+    --gs-visible-gaps-sm: 3;
+    --gs-visible-gaps-md: 2;
+    --gs-visible-gaps-lg: 3;
+    --gs-visible-gaps-xl: 5;
 
-    --glider-cq-pc: 48%;
-    --glider-cq-pc-sm: 32%;
-    --glider-cq-pc-md: 32%;
-    --glider-cq-pc-lg: 24%;
-    --glider-cq-pc-xl: 15.5%;
-
-    --glider-pager-item-color: #d3d3d3;
+    --gs-pager-item-color: #d3d3d3;
 
 }
 
@@ -39,15 +23,15 @@
 
     [data-glider-grid] {
         display: grid;
-        grid-auto-columns: var(--glider-mq-pc);
-        gap: var(--glider-spacing);
+        grid-auto-columns: calc((100% - var(--gs-visible-gaps) * var(--gs-gap-spacing)) / var(--gs-visible-cols));
+        gap: var(--gs-gap-spacing);
         grid-auto-flow: column;
         overflow-x: scroll;
         overscroll-behavior-x: contain;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         scrollbar-width: none;
-        padding: 0.5rem;
+        margin: 0.5rem 0;
     }
 
     [data-glider-item] {
@@ -62,27 +46,30 @@
 
     [data-glider-grid] {
         @media (min-width: 576px) {
-            // grid-auto-columns: calc(97% / 3.8);
-            grid-auto-columns: var(--glider-mq-pc-sm);
+            --gs-visible-cols: var(--gs-visible-cols-sm);
+            --gs-visible-gaps: var(--gs-visible-gaps-sm);
         }
 
         @media (min-width: 768px) {
-            grid-auto-columns: var(--glider-mq-pc-md);
+            --gs-visible-cols: var(--gs-visible-cols-md);
+            --gs-visible-gaps: var(--gs-visible-gaps-md);
         }
 
         @media (min-width: 992px) {
-            grid-auto-columns: var(--glider-mq-pc-lg);
+            --gs-visible-cols: var(--gs-visible-cols-lg);
+            --gs-visible-gaps: var(--gs-visible-gaps-lg);
         }
 
         @media (min-width: 1200px) {
-            grid-auto-columns: var(--glider-mq-pc-xl);
+            --gs-visible-cols: var(--gs-visible-cols-xl);
+            --gs-visible-gaps: var(--gs-visible-gaps-xl);
         }
 
-        @media (min-width: 992px) {
-            &.glider-grid-6-cols {
-                grid-auto-columns: 32%;
-            }
-        }
+        // @media (min-width: 992px) {
+        //     &.glider-grid-6-cols {
+        //         grid-auto-columns: 32%;
+        //     }
+        // }
     }
 }
 
@@ -98,16 +85,16 @@
     border: none;
     width: 1rem;
     height: 1rem;
-    background-color: var(--glider-pager-item-color);
+    background-color: var(--gs-pager-item-color);
     border-radius: 50%;
     cursor: pointer;
 
     &:hover, &:focus {
-        outline: 2px solid color-mix(in oklch, var(--glider-pager-item-color), #000 15%);
+        outline: 2px solid color-mix(in oklch, var(--gs-pager-item-color), #000 15%);
     }
 
     &[data-state="active"] {
-        background-color: color-mix(in oklch, var(--glider-pager-item-color), #000 10%);
+        background-color: color-mix(in oklch, var(--gs-pager-item-color), #000 10%);
     }
 }
 
@@ -124,20 +111,27 @@
         container-name: glider-cq;
 
         [data-glider-grid] {
+            --gs-visible-cols: 1.5;
+            --gs-visible-gaps: 1;
+
             @container glider-cq (min-width: 510px) {
-                grid-auto-columns: var(--glider-cq-pc-sm);
+                --gs-visible-cols: 3;
+                --gs-visible-gaps: 2;
             }
 
             @container glider-cq (min-width: 690px) {
-                grid-auto-columns: var(--glider-cq-pc-md);
+                --gs-visible-cols: 4;
+                --gs-visible-gaps: 3;
             }
 
             @container glider-cq (min-width: 930px) {
-                grid-auto-columns: var(--glider-cq-pc-lg);
+                --gs-visible-cols: 5;
+                --gs-visible-gaps: 4;
             }
 
             @container glider-cq (min-width: 1080px) {
-                grid-auto-columns: var(--glider-cq-pc-xl);
+                --gs-visible-cols: 6;
+                --gs-visible-gaps: 5;
             }
         }
     }
