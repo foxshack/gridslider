@@ -150,6 +150,12 @@ glider.getNumberOfItems = function () {
   return this.items.length;
 };
 
+glider.refreshLayout = function () {
+  this.updatePager();
+  this.updateActivePage();
+  this.updateButtonStates();
+};
+
 /**
  * Calculate the number of displayed elements that should be visible in
  * the viewport at this point.
@@ -245,11 +251,23 @@ glider.updatePager = function () {
 };
 
 glider.updateActivePage = function () {
+  if (!this.items.length) {
+    return;
+  }
+
   const scrollIndex = this.calculateScrollIndex();
+  const lastPage = scrollIndex.length - 1;
+
+  // Prioritise scroll-position based detection for end-of-track edge cases
+  // (sub-pixel rounding, gaps and partial clipping of the final item).
+  if (this.isAtEnd()) {
+    this.setActivePage(lastPage);
+    return;
+  }
 
   // if the last element is in view, set the active page to the last page
   if (withinViewport(this.items[this.items.length - 1], this.grid, 16)) {
-    this.setActivePage(scrollIndex.length - 1);
+    this.setActivePage(lastPage);
     return;
   }
 
@@ -269,20 +287,12 @@ glider.updateActivePage = function () {
 glider.setActivePage = function (pageNumber) {
   const pagerItems = this.pager.querySelectorAll(this.pagerItemSelector);
 
-  if (pagerItems.length === 0) {
-    return;
+  if (pagerItems.length > 0) {
+    pagerItems.forEach((item) => {
+      item.removeAttribute("data-state");
+    });
+    pagerItems[pageNumber].setAttribute("data-state", "active");
   }
-
-  pagerItems.forEach((item) => {
-    item.removeAttribute("data-state");
-  });
-
-  // During responsive recalculations, pageNumber can briefly exceed pager length.
-  const safePageNumber = Math.max(
-    0,
-    Math.min(pageNumber, pagerItems.length - 1),
-  );
-  pagerItems[safePageNumber].setAttribute("data-state", "active");
 };
 
 /**
@@ -295,14 +305,11 @@ glider.initPager = function () {
   window.addEventListener(
     "resize",
     debounce(function () {
-      that.updatePager();
-      that.updateActivePage();
-      that.updateButtonStates();
+      that.refreshLayout();
     }, 250),
   );
 
-  this.updatePager();
-  this.updateActivePage();
+  this.refreshLayout();
   this.onScrollEnd();
 };
 
@@ -427,11 +434,20 @@ glider.scrollToPreviousPage = function () {
  * Helper function for navigation methods
  */
 glider.getCurrentPage = function () {
+  if (!this.items.length) {
+    return 0;
+  }
+
   const scrollIndex = this.calculateScrollIndex();
+  const lastPage = scrollIndex.length - 1;
+
+  if (this.isAtEnd()) {
+    return lastPage;
+  }
 
   // if the last element is in view, return the last page
   if (withinViewport(this.items[this.items.length - 1], this.grid, 16)) {
-    return scrollIndex.length - 1;
+    return lastPage;
   }
 
   // set active page to 0

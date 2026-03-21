@@ -147,44 +147,45 @@ For component-based responsive behavior:
 
 ### CSS Variables
 
-GridSlider now uses percentage-based column width variables for responsive `grid-auto-columns` sizing.
-This replaces the older column-count and peek-based variables (`--glider-grid-columns*` and `--glider-peek`).
+GridSlider uses a simplified variable model based on visible columns and visible gaps.
+`grid-auto-columns` is derived automatically from these values:
+
+`calc((100% - var(--gs-visible-gaps) * var(--gs-gap-spacing)) / var(--gs-visible-cols))`
 
 ```css
 :root {
-  --glider-spacing: 1rem; /* Gap between items */
+  --gs-gap-spacing: 1rem;
 
-  /* Media query variant (.glider-mq) */
-  --glider-mq-pc: 48%;
-  --glider-mq-pc-sm: 28%;
-  --glider-mq-pc-md: 32.3%;
-  --glider-mq-pc-lg: 24%;
-  --glider-mq-pc-xl: 15.5%;
+  --gs-visible-cols: 2;
+  --gs-visible-gaps: 1;
 
-  /* Container query variant (.glider-cq) */
-  --glider-cq-pc: 48%;
-  --glider-cq-pc-sm: 32%;
-  --glider-cq-pc-md: 32%;
-  --glider-cq-pc-lg: 24%;
-  --glider-cq-pc-xl: 15.5%;
+  --gs-visible-cols-sm: 3.8;
+  --gs-visible-cols-md: 3;
+  --gs-visible-cols-lg: 4;
+  --gs-visible-cols-xl: 6;
 
-  --glider-pager-item-color: #d3d3d3; /* Pager dot base color */
+  --gs-visible-gaps-sm: 3;
+  --gs-visible-gaps-md: 2;
+  --gs-visible-gaps-lg: 3;
+  --gs-visible-gaps-xl: 5;
+
+  --gs-pager-item-color: #d3d3d3;
 }
 ```
 
-Lower percentages show more items in view; higher percentages show fewer, larger items.
+At each breakpoint, update only `--gs-visible-cols*` and `--gs-visible-gaps*`.
+Higher `--gs-visible-cols*` values show more items; lower values show fewer, larger items.
 
 Example override:
 
 ```css
 :root {
-  --glider-mq-pc-sm: 30%;
-  --glider-mq-pc-md: 30%;
-  --glider-cq-pc-sm: 30%;
+  --gs-visible-cols-md: 4;
+  --gs-visible-gaps-md: 3;
 }
 ```
 
-If upgrading from v1.0.0, remove any `--glider-peek` and `--glider-grid-columns*` overrides, as they no longer affect layout.
+If upgrading from older setups, remove legacy `--glider-*` layout variables, as layout now uses the `--gs-visible-*` model.
 
 ### Styling Variants
 
@@ -197,6 +198,8 @@ If upgrading from v1.0.0, remove any `--glider-peek` and `--glider-grid-columns*
 ```html
 <div data-glider class="glider-cq">...</div>
 ```
+
+For container queries, variables are set at selector level (`.glider-cq [data-glider-grid]`) rather than globally. This makes it easy to extend behavior with additional classes and custom media/container queries by overriding `--gs-visible-cols` and `--gs-visible-gaps` where needed.
 
 ### Custom Styling
 
@@ -346,9 +349,9 @@ Contributions are welcome! Feel free to:
 ## 📝 Changelog
 
 ### v1.1.0 (2026)
-- 🎨 Switched responsive track sizing to percentage-based CSS variables
-- 📐 Added separate variable sets for `.glider-mq` and `.glider-cq` breakpoints
-- 🧭 Added `--glider-pager-item-color` for pager dot theming
+- 🎨 Simplified responsive track sizing to `--gs-visible-cols*` and `--gs-visible-gaps*`
+- 📐 Documented selector-level container query overrides for easier extension
+- 🧭 Added `--gs-pager-item-color` for pager dot theming
 
 ### v1.0.0 (2026)
 - ✨ Refactored to use modern data attribute pattern

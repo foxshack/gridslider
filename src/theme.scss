@@ -15,7 +15,6 @@
     --gs-visible-gaps-xl: 5;
 
     --gs-pager-item-color: #d3d3d3;
-
 }
 
 [data-glider] {
@@ -64,12 +63,6 @@
             --gs-visible-cols: var(--gs-visible-cols-xl);
             --gs-visible-gaps: var(--gs-visible-gaps-xl);
         }
-
-        // @media (min-width: 992px) {
-        //     &.glider-grid-6-cols {
-        //         grid-auto-columns: 32%;
-        //     }
-        // }
     }
 }
 
@@ -97,11 +90,6 @@
         background-color: color-mix(in oklch, var(--gs-pager-item-color), #000 10%);
     }
 }
-
-// xl: 1080 (6)
-// lg: 930 (4)
-// md: 690 (3)
-// sm: 510 (3.5)
 
 // Container query based responsive variant
 @supports (container-type: inline-size) {
