@@ -57,22 +57,13 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: make install
 
       - name: Validate package version matches tag
-        shell: bash
-        run: |
-          TAG_VERSION="${{ steps.meta.outputs.tag }}"
-          TAG_VERSION="${TAG_VERSION#v}"
-          PKG_VERSION="$(node -p "require('./package.json').version")"
-
-          if [[ "$TAG_VERSION" != "$PKG_VERSION" ]]; then
-            echo "Tag version ($TAG_VERSION) does not match package.json version ($PKG_VERSION)."
-            exit 1
-          fi
+        run: make validate-version TAG=${{ steps.meta.outputs.tag }}
 
       - name: Build
-        run: npm run build
+        run: make build
 
       - name: Create GitHub release and upload artifacts
         uses: softprops/action-gh-release@v2
