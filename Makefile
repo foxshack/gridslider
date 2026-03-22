@@ -1,4 +1,6 @@
-.PHONY: install install-pre-commit pre-commit build clean validate-version
+.PHONY: install install-pre-commit pre-commit build clean tag validate-version
+
+$PACKAGE := 'gridslider' $(shell node -p "require('./package.json').name")
 
 # Install npm dependencies
 install:
@@ -24,6 +26,13 @@ build:
 # Remove built output
 clean:
 	npm run clean
+
+tag: clean build
+	@VERSION=$$(node -p "require('./package.json').version"); \
+	git add .; \
+	git commit -m "Build dist for v$$VERSION"; \
+	git tag -a "v$$VERSION" -m "Release v$$VERSION"; \
+	git push origin main "v$$VERSION"
 
 # Validate package.json version matches a given git tag (usage: make validate-version TAG=v1.2.3)
 validate-version:
