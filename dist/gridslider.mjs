@@ -234,6 +234,10 @@ $d48e1cd1057d96ba$var$glider.setActivePage = function(pageNumber) {
     window.addEventListener("resize", $d48e1cd1057d96ba$var$debounce(function() {
         that.refreshLayout();
     }, 250));
+    // attach event listener for orientation change
+    window.addEventListener("orientationchange", function() {
+        that.refreshLayout();
+    });
     this.refreshLayout();
     this.onScrollEnd();
 };

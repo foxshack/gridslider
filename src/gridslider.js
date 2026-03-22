@@ -309,6 +309,11 @@ glider.initPager = function () {
     }, 250),
   );
 
+  // attach event listener for orientation change
+  window.addEventListener("orientationchange", function () {
+    that.refreshLayout();
+  });
+
   this.refreshLayout();
   this.onScrollEnd();
 };
