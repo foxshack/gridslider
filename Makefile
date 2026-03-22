@@ -27,9 +27,15 @@ build:
 clean:
 	npm run clean
 
-tag: clean build
+tag:
 	@VERSION=$$(node -p "require('./package.json').version"); \
-	git add .; \
+	if git rev-parse "v$$VERSION" >/dev/null 2>&1; then \
+		echo "Tag v$$VERSION already exists. Aborting."; \
+		exit 1; \
+	fi; \
+	npm run clean; \
+	npm run build; \
+	git add -f dist/; \
 	git commit -m "Build dist for v$$VERSION"; \
 	git tag -a "v$$VERSION" -m "Release v$$VERSION"; \
 	git push origin main "v$$VERSION"
