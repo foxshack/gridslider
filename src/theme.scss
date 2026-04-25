@@ -2,17 +2,12 @@
     --gs-gap-spacing: 1rem;
 
     --gs-visible-cols: 2;
-    --gs-visible-gaps: 1;
+    --gs-visible-gaps: calc(round(up, var(--gs-visible-cols), 1) - 1);
 
     --gs-visible-cols-sm: 3.8;
     --gs-visible-cols-md: 3;
     --gs-visible-cols-lg: 4;
     --gs-visible-cols-xl: 6;
-
-    --gs-visible-gaps-sm: 3;
-    --gs-visible-gaps-md: 2;
-    --gs-visible-gaps-lg: 3;
-    --gs-visible-gaps-xl: 5;
 
     --gs-pager-item-color: #d3d3d3;
 }
@@ -21,6 +16,7 @@
     position: relative;
 
     [data-glider-grid] {
+        --gs-visible-gaps: calc(round(up, var(--gs-visible-cols), 1) - 1);
         display: grid;
         grid-auto-columns: calc((100% - var(--gs-visible-gaps) * var(--gs-gap-spacing)) / var(--gs-visible-cols));
         gap: var(--gs-gap-spacing);
@@ -45,22 +41,18 @@
     [data-glider-grid] {
         @media (min-width: 576px) {
             --gs-visible-cols: var(--gs-visible-cols-sm);
-            --gs-visible-gaps: var(--gs-visible-gaps-sm);
         }
 
         @media (min-width: 768px) {
             --gs-visible-cols: var(--gs-visible-cols-md);
-            --gs-visible-gaps: var(--gs-visible-gaps-md);
         }
 
         @media (min-width: 992px) {
             --gs-visible-cols: var(--gs-visible-cols-lg);
-            --gs-visible-gaps: var(--gs-visible-gaps-lg);
         }
 
         @media (min-width: 1200px) {
             --gs-visible-cols: var(--gs-visible-cols-xl);
-            --gs-visible-gaps: var(--gs-visible-gaps-xl);
         }
     }
 }
@@ -97,28 +89,28 @@
         container-type: inline-size;
         container-name: glider-cq;
 
+        --gs-visible-cols: 1.5;
+        --gs-visible-cols-sm: 2.5;
+        --gs-visible-cols-md: 3;
+        --gs-visible-cols-lg: 5;
+        --gs-visible-cols-xl: 7;
+
         [data-glider-grid] {
-            --gs-visible-cols: 2.5;
-            --gs-visible-gaps: 2;
 
             @container glider-cq (min-width: 510px) {
-                --gs-visible-cols: 3;
-                --gs-visible-gaps: 2;
+                --gs-visible-cols: var(--gs-visible-cols-sm);
             }
 
             @container glider-cq (min-width: 690px) {
-                --gs-visible-cols: 4;
-                --gs-visible-gaps: 3;
+                --gs-visible-cols: var(--gs-visible-cols-md);
             }
 
             @container glider-cq (min-width: 930px) {
-                --gs-visible-cols: 5;
-                --gs-visible-gaps: 4;
+                --gs-visible-cols: var(--gs-visible-cols-lg);
             }
 
             @container glider-cq (min-width: 1080px) {
-                --gs-visible-cols: 6;
-                --gs-visible-gaps: 5;
+                --gs-visible-cols: var(--gs-visible-cols-xl);
             }
         }
     }
