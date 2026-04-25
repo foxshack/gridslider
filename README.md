@@ -389,8 +389,8 @@ Replace any overrides of the old variables in your own CSS:
 
 | Old variable | New variable |
 |---|---|
-| `--glider-spacing` | `--gs-gap-spacing` |
-| `--glider-mq-pc` | `--gs-visible-cols` + `--gs-visible-gaps` |
+| `--glider-spacing`  | `--gs-gap-spacing` |
+| `--glider-mq-pc`    | `--gs-visible-cols` + `--gs-visible-gaps` |
 | `--glider-mq-pc-sm` | `--gs-visible-cols-sm` + `--gs-visible-gaps-sm` |
 | `--glider-mq-pc-md` | `--gs-visible-cols-md` + `--gs-visible-gaps-md` |
 | `--glider-mq-pc-lg` | `--gs-visible-cols-lg` + `--gs-visible-gaps-lg` |

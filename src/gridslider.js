@@ -1,3 +1,73 @@
+/* global ResizeObserver, MutationObserver */
+
+/**
+ * CSS round() function check
+ *
+ * Detects if the browser supports the CSS round() function.
+ * If not, provides a fallback by calculating values in JavaScript.
+ *
+ * @returns {boolean} - True if CSS round() is supported, false otherwise
+ */
+function supportsCSSSRound() {
+  const testElement = document.createElement("div");
+  testElement.style.setProperty("--test", "calc(round(up, 1, 1))");
+  return getComputedStyle(testElement).getPropertyValue("--test").length > 0;
+}
+
+/**
+ * Fallback for CSS round() function
+ *
+ * If the browser doesn't support CSS round(), this function calculates
+ * the --gs-visible-gaps CSS custom property based on --gs-visible-cols.
+ *
+ * The formula used is: round(up, cols, 1) - 1
+ * Which calculates the number of gaps between visible columns.
+ *
+ * @param {HTMLElement} element - The glider element to apply the polyfill to
+ */
+function checkCSSRound(element) {
+  if (supportsCSSSRound()) {
+    return; // Browser supports CSS round(), no polyfill needed
+  }
+
+  const updateGaps = () => {
+    const computedStyle = getComputedStyle(element);
+    const visibleCols = parseFloat(
+      computedStyle.getPropertyValue("--gs-visible-cols"),
+    );
+
+    if (!isNaN(visibleCols)) {
+      // Calculate: round(up, visibleCols, 1) - 1
+      // This rounds up to the nearest integer, then subtracts 1
+      const roundedCols = Math.ceil(visibleCols);
+      const visibleGaps = roundedCols - 1;
+
+      element.style.setProperty("--gs-visible-gaps", visibleGaps);
+    }
+  };
+
+  // Initial calculation
+  updateGaps();
+
+  // Watch for changes using ResizeObserver or MutationObserver
+  if (window.ResizeObserver) {
+    const observer = new ResizeObserver(() => {
+      updateGaps();
+    });
+    observer.observe(element);
+  } else {
+    // Fallback to MutationObserver for older browsers
+    const observer = new MutationObserver(() => {
+      updateGaps();
+    });
+    observer.observe(element, {
+      attributes: true,
+      attributeFilter: ["style"],
+      subtree: false,
+    });
+  }
+}
+
 /**
  * Need to following functions:
  * - total number of items in the collection
@@ -53,7 +123,7 @@ const onScrollEnd = function (element, func, ...args) {
   } else {
     // fall back to scroll listener with timeout for browsers
     // that don't support scrollend
-    element.addEventListener("scroll", (event) => {
+    element.addEventListener("scroll", () => {
       clearTimeout(window.scrollEndTimer);
       window.scrollEndTimer = setTimeout(() => {
         func.apply(context, args);
@@ -528,6 +598,9 @@ glider.updateButtonStates = function () {
  * @return {Pager} - The pager object.
  */
 const makeGlider = function (element) {
+  // Apply CSS round() fallback if needed
+  checkCSSRound(element);
+
   const obj = Object.create(glider);
   obj.init({ element });
   return obj;
