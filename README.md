@@ -186,17 +186,10 @@ GridSlider uses a simplified variable model based on visible columns and visible
   --gs-gap-spacing: 1rem;
 
   --gs-visible-cols: 2;
-  --gs-visible-gaps: 1;
-
   --gs-visible-cols-sm: 3.8;
   --gs-visible-cols-md: 3;
   --gs-visible-cols-lg: 4;
   --gs-visible-cols-xl: 6;
-
-  --gs-visible-gaps-sm: 3;
-  --gs-visible-gaps-md: 2;
-  --gs-visible-gaps-lg: 3;
-  --gs-visible-gaps-xl: 5;
 
   --gs-pager-item-color: #d3d3d3;
 }
