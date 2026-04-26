@@ -1,5 +1,5 @@
 /* global ResizeObserver, MutationObserver */ /**
- * CSS round() function polyfill
+ * CSS round() function check
  *
  * Detects if the browser supports the CSS round() function.
  * If not, provides a fallback by calculating values in JavaScript.
@@ -11,7 +11,7 @@
     return getComputedStyle(testElement).getPropertyValue("--test").length > 0;
 }
 /**
- * Polyfill for CSS round() function
+ * Fallback for CSS round() function
  *
  * If the browser doesn't support CSS round(), this function calculates
  * the --gs-visible-gaps CSS custom property based on --gs-visible-cols.
@@ -20,7 +20,7 @@
  * Which calculates the number of gaps between visible columns.
  *
  * @param {HTMLElement} element - The glider element to apply the polyfill to
- */ function $d48e1cd1057d96ba$var$polyfillCSSRound(element) {
+ */ function $d48e1cd1057d96ba$var$checkCSSRound(element) {
     if ($d48e1cd1057d96ba$var$supportsCSSSRound()) return; // Browser supports CSS round(), no polyfill needed
     const updateGaps = ()=>{
         const computedStyle = getComputedStyle(element);
@@ -434,8 +434,8 @@ $d48e1cd1057d96ba$var$glider.onScrollEnd = function() {
  * @param {Object} slider - The slider object to create the pager for.
  * @return {Pager} - The pager object.
  */ const $d48e1cd1057d96ba$export$5c49591af2a4b68b = function(element) {
-    // Apply CSS round() polyfill if needed
-    $d48e1cd1057d96ba$var$polyfillCSSRound(element);
+    // Apply CSS round() fallback if needed
+    $d48e1cd1057d96ba$var$checkCSSRound(element);
     const obj = Object.create($d48e1cd1057d96ba$var$glider);
     obj.init({
         element: element

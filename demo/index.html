@@ -133,7 +133,7 @@
         <!-- Example 1: Basic Media Query Responsive -->
         <div class="demo-section">
             <h2>1. Basic Slider (Media Queries)</h2>
-            <p>A responsive slider using media queries. Automatically adjusts columns based on viewport width.</p>
+            <p>A responsive slider driven by media queries. The number of visible columns updates as the viewport gets wider.</p>
 
             <div data-glider class="glider-mq">
                 <div data-glider-grid>
@@ -158,7 +158,7 @@
         <!-- Example 2: With Navigation Buttons -->
         <div class="demo-section">
             <h2>2. Slider with Navigation</h2>
-            <p>Enhanced with previous/next buttons. Buttons automatically disable at boundaries.</p>
+            <p>Adds Start, Previous, Next, and End controls. Buttons disable automatically when no further movement is possible.</p>
 
             <div data-glider class="glider-mq">
                 <div data-glider-grid>
@@ -190,7 +190,7 @@
         <!-- Example 3: Container Query Responsive -->
         <div class="demo-section">
             <h2>3. Container Query Slider</h2>
-            <p>Uses modern container queries - responsive to container size, not viewport. Perfect for reusable components!</p>
+            <p>Uses container queries, so it responds to its own container width instead of the viewport. Useful for reusable components in mixed layouts.</p>
 
             <div data-glider class="glider-cq">
                 <div data-glider-grid>
@@ -218,7 +218,7 @@
         <!-- Example 4: Minimal Items -->
         <div class="demo-section">
             <h2>4. Few Items (Auto-hide Pager)</h2>
-            <p>When there's only one page, the pager automatically hides. Smart defaults!</p>
+            <p>With only a single page of items, the pager hides automatically to reduce visual noise.</p>
 
             <div data-glider class="glider-cq">
                 <div data-glider-grid>
@@ -238,17 +238,21 @@
         <!-- Example 5: Container Query with variable overrides -->
         <div class="demo-section">
             <h2>5. Overriding Variables (Container Query)</h2>
-            <p>Override shared theme variables on the slider container, then override layout variables on <code>data-glider-grid</code> where container-query defaults are declared.</p>
+            <p>
+                Add a custom class to the same element as <code>data-glider glider-cq</code>,
+                then override only the CSS variables needed for that slider instance.
+            </p>
 
             <style>
                 [data-glider].glider-custom {
                     --gs-pager-item-color: #e69e9e;
                     --gs-gap-spacing: 0.5rem;
-                }
 
-                .glider-custom-grid {
-                    --gs-visible-cols: 1.3;
-                    --gs-visible-cols-sm: 2.5;
+                    --gs-cs-breakpoint-sm: 300px;
+                    --gs-cs-breakpoint-md: 450px;
+
+                    --gs-visible-cols: 1.33;
+                    --gs-visible-cols-sm: 2.33;
                 }
             </style>
 
@@ -258,11 +262,12 @@
                     [data-glider].glider-custom {
                         --gs-pager-item-color: #e69e9e;
                         --gs-gap-spacing: 0.5rem;
-                    }
 
-                    .glider-custom-grid {
-                        --gs-visible-cols: 1.3;
-                        --gs-visible-cols-sm: 2.5;
+                        --gs-cs-breakpoint-sm: 300px;
+                        --gs-cs-breakpoint-md: 450px;
+
+                        --gs-visible-cols: 1.33;
+                        --gs-visible-cols-sm: 2.33;
                     }
                 &lt;/style&gt;
                 </pre>
@@ -287,7 +292,7 @@
             </div>
 
             <div class="code-hint">
-                💡 In <code>.glider-cq</code>, override <code>--gs-visible-cols</code> on <code>data-glider-grid</code>. Gaps are now derived automatically.
+                💡 Apply per-instance overrides on <code>[data-glider].glider-custom</code>. Container query breakpoints and visible columns can both be customized.
             </div>
         </div>
 

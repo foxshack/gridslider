@@ -2,9 +2,7 @@
     --gs-gap-spacing: 1rem;
 
     --gs-visible-cols: 2;
-    --gs-visible-gaps: calc(round(up, var(--gs-visible-cols), 1) - 1);
-
-    --gs-visible-cols-sm: 3.8;
+    --gs-visible-cols-sm: 2.5;
     --gs-visible-cols-md: 3;
     --gs-visible-cols-lg: 4;
     --gs-visible-cols-xl: 6;
@@ -16,7 +14,7 @@
     position: relative;
 
     [data-glider-grid] {
-        --gs-visible-gaps: calc(round(up, var(--gs-visible-cols), 1) - 1);
+        --gs-visible-gaps: calc(round(up, var(--gs-visible-cols, 1), 1) - 1);
         display: grid;
         grid-auto-columns: calc((100% - var(--gs-visible-gaps) * var(--gs-gap-spacing)) / var(--gs-visible-cols));
         gap: var(--gs-gap-spacing);
@@ -73,7 +71,8 @@
     border-radius: 50%;
     cursor: pointer;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         outline: 2px solid color-mix(in oklch, var(--gs-pager-item-color), #000 15%);
     }
 
@@ -95,21 +94,26 @@
         --gs-visible-cols-lg: 5;
         --gs-visible-cols-xl: 7;
 
+        --gs-cs-breakpoint-sm: 400px;
+        --gs-cs-breakpoint-md: 600px;
+        --gs-cs-breakpoint-lg: 800px;
+        --gs-cs-breakpoint-xl: 1000px;
+
         [data-glider-grid] {
 
-            @container glider-cq (min-width: 510px) {
+            @container glider-cq (min-width: var(--gs-cs-breakpoint-sm)) {
                 --gs-visible-cols: var(--gs-visible-cols-sm);
             }
 
-            @container glider-cq (min-width: 690px) {
+            @container glider-cq (min-width: var(--gs-cs-breakpoint-md)) {
                 --gs-visible-cols: var(--gs-visible-cols-md);
             }
 
-            @container glider-cq (min-width: 930px) {
+            @container glider-cq (min-width: var(--gs-cs-breakpoint-lg)) {
                 --gs-visible-cols: var(--gs-visible-cols-lg);
             }
 
-            @container glider-cq (min-width: 1080px) {
+            @container glider-cq (min-width: var(--gs-cs-breakpoint-xl)) {
                 --gs-visible-cols: var(--gs-visible-cols-xl);
             }
         }

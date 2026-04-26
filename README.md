@@ -228,7 +228,41 @@ If upgrading from older setups, remove legacy `--glider-*` layout variables, as 
 <div data-glider class="glider-cq">...</div>
 ```
 
-For container queries, variables are set at selector level (`.glider-cq [data-glider-grid]`) rather than globally. This makes it easy to extend behavior with additional classes and custom media/container queries by overriding `--gs-visible-cols` and `--gs-visible-gaps` where needed.
+For container queries, set overrides on the same element that has `data-glider glider-cq`.
+Then use a custom class (for example `glider-custom`) to scope per-instance values.
+
+### Override Container Query Variables With a Custom Class
+
+Use this pattern when you want one container-query slider to behave differently
+from the defaults without changing all sliders globally.
+
+```html
+<div data-glider class="glider-cq glider-custom">
+  <div data-glider-grid>
+    <!-- items -->
+  </div>
+  <div data-glider-pager></div>
+</div>
+```
+
+```css
+[data-glider].glider-custom {
+  --gs-pager-item-color: #e69e9e;
+  --gs-gap-spacing: 0.5rem;
+
+  --gs-cs-breakpoint-sm: 300px;
+  --gs-cs-breakpoint-md: 450px;
+
+  --gs-visible-cols: 1.33;
+  --gs-visible-cols-sm: 2.33;
+}
+```
+
+This works because the container-query variant (`.glider-cq`) reads these CSS
+variables from the slider container and applies them inside the grid/container
+query rules.
+
+See Example 5 in `demo/index.html` for a complete working reference.
 
 ### Custom Styling
 
@@ -379,7 +413,7 @@ Contributions are welcome! Feel free to:
 
 ### v1.1.0 (2026-03-21) — ⚠️ Breaking changes
 - 💥 **CSS variables renamed** — all layout and theming variables have moved to the `--gs-*` prefix (see migration guide below)
-- 🎨 Simplified responsive track sizing to `--gs-visible-cols*` and `--gs-visible-gaps*`
+- 🎨 Simplified responsive track sizing to `--gs-visible-cols*`
 - 📐 Container query variables now set at selector level for easier extension
 - 🐛 Fixed last-page active state edge cases in `updateActivePage` and `getCurrentPage`
 
